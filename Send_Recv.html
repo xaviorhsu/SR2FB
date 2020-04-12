@@ -1,0 +1,133 @@
+<!-- -------------------------------------start--------------------------------------------------- -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Language" content="zh-TW" />
+<meta name="description" content="SendRecv" />
+<title>SendRecv</title>
+<style type="text/css">
+</style>
+<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>try{  var h_frames=window.top.document.getElementsByTagName("frameset"); for(var i=0;i<h_frames.length;i++)  {
+      if(h_frames[i].id.indexOf("MywebFrameSet")!=-1) { h_frames[i].cols = "*,0"; }}}catch(e){}
+      $(parent.document.getElementById("adpage")).remove();
+</script>
+<script language="javascript" src="SandR.js"></script>
+<script language="javascript" src="RdFn.js"></script>
+</head>
+<body bgcolor="black" >
+<hr color="lightblue" size="10" />
+<center>
+<hr /><br />
+<fieldset style="background-image:url(image/bg3.jpg);" >
+	<legend></legend>
+<span>SENDER 資料</span>  
+<hr />
+<form id="f1" name="f1" method="post" action="Send_Recv.html" onsubmit="return chkform(this);">
+<table id="tb1" border="1" width="700" background="image/bg1.jpg" style="box-shadow:10px 5px 10px gray;" >
+<tr height="40"><td align="center">基本資料欄位集</td></tr>
+<tr><td valign="top" width="98%" >
+<table border="1" align="center" width="100%" >
+  <tr height="40">
+    <td width="20%" rowspan="4" align="center"><div id="dv1" align="center">
+    <img id="pic1" src="image/photo.jpg" style="margin-top:5px;width:125px;height:155px;border:1px solid orange;" /></div></td> 	
+    <td width="10%" align="center"><label>編號</label></td>
+    <td width="24%" align="center">
+        <input type="text" id="idn" name="idn" value="" size="15" />
+    </td>
+    <td width="10%" align="center"><label>血型</label></td>
+    <td width="36%" align="center">
+        <select id="se0" name="se0" style="width:40%" >
+            <option value="A" >A</option>
+            <option value="B" >B</option>
+            <option value="O" >O</option>
+            <option value="AB">AB</option>
+            <option value="其他">其他</option>
+        </select>
+    </td>
+  </tr>
+  <tr height="40">    
+    <td align="center"><label>姓名</label></td>
+    <td align="center">
+        <input type="text" id="na1" name="na1" value="" size="15" />
+    </td>   
+    <td align="center"><label>生日</label></td>
+    <td align="center">
+    	   <select name="m_year" id="m_year"><script type="text/javascript">
+                var str='<option value="">--</option>'; today_Y=tod[0];
+                for (var i=(today_Y-18);i>=(today_Y-65);i--) { str+='<option value="'+i+'">'+i+'</option>'; }
+                document.write(str);
+          </script></select>年
+          <select name="m_month" id="m_month"><script type="text/javascript">
+                var str='<option value="">--</option>';
+                for (var i=1;i<=12;i++)  {zero=(i<10)?'0':''; str+='<option value="'+zero+i+'">'+zero+i+'</option>';  }
+                document.write(str);
+          </script></select>月
+          <select name="m_date" id="m_date"><script type="text/javascript">
+                var str='<option value="">--</option>';
+                for (var i=1;i<=31;i++)  {zero=(i<10)?'0':''; str+='<option value="'+zero+i+'">'+zero+i+'</option>';  }
+                document.write(str);
+          </script></select>日
+    </td>
+  </tr>
+  <tr height="40">
+    <td align="center"><label>性別</label></td>
+    <td align="center">
+          <input type="radio" id="rd1" name="rd" value="男" />男
+          <input type="radio" id="rd2" name="rd" value="女" />女
+    </td>   
+    <td align="center"><label>學歷</label></td>
+    <td align="center">
+              <select id="se1" name="se1" style="width:50%;font-size:16px;" >
+              <option value="高中" >高中</option>
+              <option value="專科" >專科</option>
+              <option value="大學" selected="selected" >大學</option>
+              <option value="研所" >研所</option>
+              <option value="其他" >其他</option>
+          </select>
+    </td>
+  </tr>
+  <tr height="40">     	
+    <td align="center"><label>興趣</label></td>
+    <td align="center" colspan="3">
+          <input type="checkbox" id="ck1" name="ck[]" value="閱讀" />閱讀
+          <input type="checkbox" id="ck2" name="ck[]" value="打球" />打球
+          <input type="checkbox" id="ck3" name="ck[]" value="音樂" />音樂
+          <input type="checkbox" id="ck4" name="ck[]" value="游泳" />游泳
+    </td>
+  </tr>
+  <tr height="40">
+     <td colspan="2" align="left" style="font-size: small;">
+          <input type="button" id="btp" name="btp" value="【上傳照片】" />.jpg檔
+          <span id="sp0">《未上傳》<br/></span><input type="file" id="filep" name="filep" size="50" />
+     </td>
+     <td colspan="3" align="center">
+<input type="hidden" id="jpg" name="jpg" value="" />
+<input type="button" id="bt2" name="bt2" value="瀏覽" style="background-color:gold;color:purple;" onclick="javascript:top.location.href='SendRecv.html?sw=s';" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" id="bt3" name="bt3" value="查詢" style="background-color:gold;color:purple;" onclick="javascript:top.location.href='SendRecv.html?sw=q';" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" id="sb1" name="sb1" value="儲存" style="color:gray;" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" id="bt4" name="bt4" value="刪除" style="color:gray;" onclick="authchk('d');" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" id="bt5" name="bt5" value="修改" style="color:gray;" onclick="authchk('m');"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" id="re1" name="re1" value="清除" style="color:gray;" onclick="javascript:form_clr();" />
+	   </td>
+   </tr>
+</table>
+</td></tr>
+<tr height="40"><td>
+<div align="center" id="dv1" style="color:red; font-weight:bold;"></div>
+</td></tr>
+</table>
+</form>
+<hr />
+</fieldset>
+<br /><hr />
+</center>
+<hr color="yellow" size="10" />
+</body>
+</html>
+<!-- ---------------------------------prog-end-------------------------------------------------- -->
+<noscript>
