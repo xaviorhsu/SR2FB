@@ -1,6 +1,6 @@
-var http_ip=(location.hostname=="hsuvm6.myweb.hinet.net")?"http://"+location.hostname+"/Adnil/":"http://websrv.local.tw/Adnil/";
+var http_ip=(location.hostname=="websrv.local.tw")?"http://websrv.local.tw/SR2FB/":"https://"+location.hostname+"/SR2FB/";
 var stg_root_node, stg_device, db, qur, dno, pars, tod;
-pars=getUrlVars("sw"); tod = show_today();
+pars=getUrlVars("sw"); var tod = show_today();	
 /* ========================================================= */
   function displymsg(A,B)	{
     var msg="";var key="";
@@ -44,7 +44,7 @@ pars=getUrlVars("sw"); tod = show_today();
 		case "q": { //查詢方式
         chr=(pars=="q")?"0":"m";
 		    if(B == "0") { show_rec(A); } //單筆
-		    else if(B == "") {//姓名模糊/性別/血型/學歷 多筆
+        else if(B == "") {//姓名模糊/性別/血型/學歷 多筆 
               var lno=0; var item=""; var type=1; //1模糊
               if(pars=="m") { switch ($("#sem :selected").val()) {
                               case "姓名": { type=1; break; } case "性別": case "血型": case "學歷": { type=0; break; }  }  }
@@ -75,7 +75,7 @@ pars=getUrlVars("sw"); tod = show_today();
         		  });  
               }
         }
-		    else {//區間 / 全部多筆
+		    else { //區間 / 全部多筆
               var lno=0;  
             	db.on("value",function(data){	  
                   $.each(data.val(),function(k,v){
@@ -94,7 +94,9 @@ pars=getUrlVars("sw"); tod = show_today();
       		  db.orderByChild("Aidn").on("child_added",function(s){ sno++;  zno=(sno<10)?'0':'';
       		   //C=[s.val().Aidn,s.val().Bnam,s.val().Csex,s.val().Dbld,s.val().Ebir,s.val().Fsch,s.val().Gins];
       		   //fun1(C);
-      			 msg+="\t&emsp;"+zno+sno+"\t&emsp;&emsp;"+s.val().Aidn+"\t&emsp;"+s.val().Bnam+"\t&emsp;"+s.val().Csex+"\t&emsp;"+s.val().Dbld+"\t&emsp;"
+      			 msg+="\t&emsp;"+'<input type="checkbox" id="'+pars+sno+'" name="'+s.val().Aidn+'" value="'+s.val().Aidn+'"  />'+"\t"
+             //msg+="\t&emsp;"+"\t&emsp;"
+                +zno+sno+"\t&emsp;&emsp;"+s.val().Aidn+"\t&emsp;"+s.val().Bnam+"\t&emsp;"+s.val().Csex+"\t&emsp;"+s.val().Dbld+"\t&emsp;"
                 +s.val().Ebir.substr(0,4)+"/"+s.val().Ebir.substr(4,2)+"/"+s.val().Ebir.substr(6,2)+"\t&emsp;"+s.val().Fsch+"\t&emsp;"
                 +s.val().Gins+"<br\>";
      		    if (msg=="") alert("[查無資料]"); else $("#dv4").html(msg);	
@@ -115,7 +117,7 @@ function show_rec(Ano){
                     $("#lba").html(v.Aidn);$("#lbb").html(v.Dbld);$("#lbc").html(v.Bnam);$("#lbd").html(v.Ebir.substr(0,4)+"/"+v.Ebir.substr(4,2)+"/"+v.Ebir.substr(6,2));
                     $("#lbe").html(v.Csex);$("#lbf").html(v.Fsch);$("#lbg").html(v.Gins);$("#Hpic").val(v.Hpic); }
                   else {
-                    $("#idn").val(v.Aidn);$("#na1").val(v.Bnam);
+                    $("#idn").val(v.Aidn); $("#na1").val(v.Bnam);
                     $("#se0 option[value="+v.Dbld+"]").prop("selected","selected");
                     $("#m_year  option[value="+v.Ebir.substr(0,4)+"]").prop("selected","selected");
                     $("#m_month option[value="+v.Ebir.substr(4,2)+"]").prop("selected","selected");
@@ -130,8 +132,7 @@ function show_rec(Ano){
              			}
                   });
          if ($("#dkey").val()=="") alert("[查無資料]"); else { if(pars=="d") $("#btd").val("確定刪除"); if(pars=="m") $("#btm").val("確定修改"); }    
-       		    });
-         //if ($("#dkey").val()=="") alert("[查無資料]"); else  if(pars=="d") $("#btd").val("確定刪除");     
+       		    });   
     }
 // ----- //
 function push_stg(f){
@@ -222,9 +223,11 @@ function form_clr() {
   }
 // ----- //
 function authchk(where) {
-      var whois=prompt("請輸入『芝麻開門』的通關密語？","");      
-      var pswd=tod[2]+tod[3]+tod[8]; var con = false;
-      if (whois==pswd) { if (where=="a") { con=true ; } else top.location.href='SendRecv.html?sw='+where; }
+	  if ( $('#adm').val() ) var con = true;
+	  else { var con = false;
+	  var whois=prompt("請輸入『芝麻開門』的通關密語？",""); var pswd=String(tod[2])+String(tod[3])+tod[8];         //alert(pswd);
+      if (whois==pswd) { whereA=where.toUpperCase(); con=true; $('#adm').val("1"); if (whereA!="A") top.location.href='SendRecv.html?sw='+where; }
+		   }
       return con;
   }
 // ----- //
@@ -237,6 +240,7 @@ function chkform(form) {
           (!form.ck1.checked && !form.ck2.checked && !form.ck3.checked && !form.ck4.checked)  )
               {  alert("輸入不完全!"); return false;}
       alert("是這張相片嗎?"); push_fb();$("#jpg").val("");$("#pic1").attr("src","image/photo.jpg"); $("#sp0").html("《未上傳》"); form_clr();
+	  ($("#f1").action("Send_Recv.html?sw='on'"))
     }  
       return false;
   }

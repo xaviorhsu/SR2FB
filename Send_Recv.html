@@ -1,4 +1,4 @@
-<!-- -------------------------------------start--------------------------------------------------- -->
+<!-- -------------------------------------SENDER start--------------------------------------------------- -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +10,10 @@
 <style type="text/css">
 </style>
 <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script>try{  var h_frames=window.top.document.getElementsByTagName("frameset"); for(var i=0;i<h_frames.length;i++)  {
-      if(h_frames[i].id.indexOf("MywebFrameSet")!=-1) { h_frames[i].cols = "*,0"; }}}catch(e){}
-      $(parent.document.getElementById("adpage")).remove();
-</script>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>-->
+<script src="jquery.min.js"></script>
+
 <script language="javascript" src="SandR.js"></script>
 <script language="javascript" src="RdFn.js"></script>
 </head>
@@ -41,7 +39,7 @@
     </td>
     <td width="10%" align="center"><label>血型</label></td>
     <td width="36%" align="center">
-        <select id="se0" name="se0" style="width:40%" >
+        <select id="se0" name="se0">
             <option value="A" >A</option>
             <option value="B" >B</option>
             <option value="O" >O</option>
@@ -103,16 +101,16 @@
   <tr height="40">
      <td colspan="2" align="left" style="font-size: small;">
           <input type="button" id="btp" name="btp" value="【上傳照片】" />.jpg檔
-          <span id="sp0">《未上傳》<br/></span><input type="file" id="filep" name="filep" size="50" />
+          <span id="sp0">《未上傳》<br/></span><input type="file" id="filep" name="filep" size="12" />
      </td>
      <td colspan="3" align="center">
-<input type="hidden" id="jpg" name="jpg" value="" />
-<input type="button" id="bt2" name="bt2" value="瀏覽" style="background-color:gold;color:purple;" onclick="javascript:top.location.href='SendRecv.html?sw=s';" />&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" id="bt3" name="bt3" value="查詢" style="background-color:gold;color:purple;" onclick="javascript:top.location.href='SendRecv.html?sw=q';" />&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" id="sb1" name="sb1" value="儲存" style="color:gray;" />&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" id="bt4" name="bt4" value="刪除" style="color:gray;" onclick="authchk('d');" />&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" id="bt5" name="bt5" value="修改" style="color:gray;" onclick="authchk('m');"/>&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="button" id="re1" name="re1" value="清除" style="color:gray;" onclick="javascript:form_clr();" />
+<input type="button" id="bt2" name="bt2" value="瀏覽" style="cursor:pointer;color:blue;" onclick="javascript:top.location.href='SendRecv.html?sw=s';" title="排序瀏覽" />&nbsp;&nbsp;&nbsp;
+<input type="button" id="bt3" name="bt3" value="查詢" style="cursor:pointer;color:blue;" onclick="javascript:top.location.href='SendRecv.html?sw=q';" />&nbsp;｜
+<input type="submit" id="sb1" name="sb1" value="儲存" style="cursor:pointer;color:red;" title="新增儲存" />&nbsp;&nbsp;&nbsp;
+<input type="button" id="bt4" name="bt4" value="刪除" style="cursor:pointer;color:red;" onclick="authchk('d');" />&nbsp;&nbsp;&nbsp;
+<input type="button" id="bt5" name="bt5" value="修改" style="cursor:pointer;color:red;" onclick="authchk('m');"/>&nbsp;&nbsp;&nbsp;
+<input type="reset" id="re1" name="re1" value="清除" style="cursor:pointer;color:gray;" onclick="javascript:form_clr();" />
+<input type="hidden" id="jpg" name="jpg" value="" />	<input type="hidden" id="adm" name="adm" value="" />
 	   </td>
    </tr>
 </table>
@@ -130,4 +128,3 @@
 </body>
 </html>
 <!-- ---------------------------------prog-end-------------------------------------------------- -->
-<noscript>

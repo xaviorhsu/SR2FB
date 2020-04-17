@@ -1,4 +1,4 @@
-<!-- -------------------------------------start--------------------------------------------------- -->
+<!-- -------------------------------------RECIVER start--------------------------------------------------- -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +9,11 @@
 <title>SendRecv</title>
 <style type="text/css">
 </style>
-<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script>try{  var h_frames=window.top.document.getElementsByTagName("frameset"); for(var i=0;i<h_frames.length;i++)  {
-      if(h_frames[i].id.indexOf("MywebFrameSet")!=-1) { h_frames[i].cols = "*,0"; }}}catch(e){}
-      $(parent.document.getElementById("adpage")).remove();
-</script>
+-<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>-->
+<script src="jquery.min.js"></script>
+
 <script language="javascript" src="SandR.js"></script>
 <script language="javascript" src="RdFn.js"></script>
 </head>
@@ -83,7 +81,7 @@
                       <input type="radio" id="rd1" name="rd" value="1" checked="checked" />單筆
                       <input type="radio" id="rd2" name="rd" value="2" />區間
                       <input type="radio" id="rd3" name="rd" value="3" />模糊
-                      <input type="radio" id="rd4" name="rd" value="4" />全部&nbsp;&nbsp;&nbsp;==>&nbsp;&nbsp;
+                      <input type="radio" id="rd4" name="rd" value="4" />全部&nbsp;&nbsp;==>&nbsp;&nbsp;
         </td>
         <td width="34%">
         <span id="spq1" style="display: block;">編　號:<input type="text" id="t0" name="t0" size="3" /></span>
@@ -124,11 +122,11 @@
     <input type="hidden" id="Hpic" name="Hpic" value="" />
     </div></td> 	
     <td width="10%" align="center"><label>編號</label></td>
-    <td width="24%" align="center" id="lba" class="lb"><script type="text/javascript">
+    <td width="24%" align="center" id="lba" class="lb"><script>
         document.write((pars=="m")?'<input type="text" id="idn" name="idn" value="" size="15" />':'');
     </script></td>
     <td width="10%" align="center"><label>血型</label></td>
-    <td width="36%" align="center" id="lbb" class="lb"><script type="text/javascript">
+    <td width="36%" align="center" id="lbb" class="lb"><script>
         document.write((pars=="m")?'<select id="se0" name="se0" style="width:40%" ><option value="A" >A</option>'
             +'<option value="B" >B</option><option value="O" >O</option><option value="AB">AB</option>'
             +'<option value="其他">其他</option></select>':'');
@@ -136,11 +134,11 @@
   </tr>
   <tr height="40">    
     <td align="center"><label>姓名</label></td>
-    <td align="center" id="lbc" class="lb"><script type="text/javascript">
+    <td align="center" id="lbc" class="lb"><script>
         document.write((pars=="m")?'<input type="text" id="na1" name="na1" value="" size="15" />':'');
     </script></td> 
     <td align="center"><label>生日</label></td>
-    <td align="center" id="lbd" class="lb"><script type="text/javascript">
+    <td align="center" id="lbd" class="lb"><script>
         if(pars=="m") { var str='<select name="m_year" id="m_year"><option value="">--</option>';
           today=show_today(); today_Y=today[0];
           for(var i=(today_Y-18);i>=(today_Y-65);i--) { str+='<option value="'+i+'">'+i+'</option>'; }
@@ -153,12 +151,12 @@
   </tr>
   <tr height="40">
     <td align="center"><label>性別</label></td>
-    <td align="center" id="lbe" class="lb"><script type="text/javascript">
+    <td align="center" id="lbe" class="lb"><script>
         document.write((pars=="m")?'<input type="radio" id="rdm" name="mrd" value="男" \>男'
             +'<input type="radio" id="rdg" name="mrd" value="女" \>女':'');
     </script></td>   
     <td align="center"><label>學歷</label></td>
-    <td align="center" id="lbf" class="lb"><script type="text/javascript">
+    <td align="center" id="lbf" class="lb"><script>
         document.write((pars=="m")?'<select id="se1" name="se1" style="width:50%;font-size:16px;" >'
             +'<option value="高中" >高中</option><option value="專科" >專科</option><option value="大學" selected="selected" >大學</option>'
             +'<option value="研所" >研所</option><option value="其他" >其他</option></select>':'');
@@ -166,7 +164,7 @@
   </tr>
   <tr height="40">     	
     <td align="center"><label>興趣</label></td>
-    <td align="center" id="lbg" class="lb" colspan="3"><script type="text/javascript">
+    <td align="center" id="lbg" class="lb" colspan="3"><script>
         document.write((pars=="m")?'<input type="checkbox" id="ck1" name="ck[]" value="閱讀" />閱讀'
            +'<input type="checkbox" id="ck2" name="ck[]" value="打球" />打球'
            +'<input type="checkbox" id="ck3" name="ck[]" value="音樂" />音樂'
@@ -174,12 +172,19 @@
     </script></td>
   </tr>
     <tr height="40">
-     <td colspan="2" align="left" style="font-weight:normal;font-size:small;"><script type="text/javascript">
+     <td colspan="2" align="left" style="font-weight:normal;font-size:small;"><script>
         document.write((pars=="m")?'<input type="button" id="mbt" name="mbt" value="【更換照片】" />.jpg檔'
             +'<span id="msp0">《未上傳》<br/></span><input type="file" id="file1" name="file1" size="50" />':'');</script>
      </td>
      <td colspan="3" align="center" style="font-weight:normal; font-size:small;">
-        <input type="button" value="回首頁" onclick="javascript:top.location.href='Send_Recv.html';"  />     
+      <!--
+        <div id="recv" align="center" style="display:none;font-weight:normal; font-size:small;">
+        <script type="text/javascript">
+        document.write('<input type="button" value="回R首頁" onclick="javascript:top.location.href=\'SendRecv.html?sw='+pars+'\';" style="cursor:pointer;color:blue;" />');
+        </script>
+        </div>
+      -->
+        <input type="button" value="回首頁" onclick="javascript:top.location.href='Send_Recv.html';"  />
      </td>
    </tr>
   </table>
@@ -200,4 +205,3 @@
 </body>
 </html>
 <!-- ---------------------------------prog-end-------------------------------------------------- -->
-<noscript>

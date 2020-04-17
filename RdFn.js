@@ -30,17 +30,23 @@ $("#mbt").click(function() {
    });
 // ----- //  
   db=new Firebase("https://chien1-9a5df.firebaseio.com");
-  var msg="",key=""; var likena,p1,p2;
+  var msg="",key=""; var likena,p1,p2;                           //alert(pars);
+switch (pars) { 
+		case "on": 	$('#adm').val("1");	 break;
+		case "A":
+		case "D":
+		case "M": 	$('#ADM').val("1"); pars=pars.toLowerCase();	 break;
+				   }
 switch (pars)
 		{ 
 		case "d": {
-			$("#dv0,#dvm,#dvq,#table1,#back").hide(); $("#dvd,#table2").show();
+			$("#dv0,#dvm,#dvq,#table1").hide(); $("#dvd,#table2,#recv,#back").show();
 			break; }
 		case "m": {
-			$("#dv0,#dvd,#dvq,#table1,#back").hide(); $("#dvm,#table2").show();
+			$("#dv0,#dvd,#dvq,#table1").hide(); $("#dvm,#table2,#recv,#back").show();
 			break; }
 		case "q": {
-			$("#dv0,#dvd,#dvm,#table1,#back").hide(); $("#dvq,#table2").show();
+			$("#dv0,#dvd,#dvm,#table1,#recv").hide(); $("#dvq,#table2,#back").show();
 			break; }
 		case "s": {
 			$("#dv0").html("<label style='border: 1px solid red;box-shadow:5px 5px 5px yellow;'>排序瀏覽結果</label>"); $("#dvm,#dvq,#dvd,#table2").hide(); $("#table1,#dv0,#dv4,#back").show();  displymsg("0","0");
@@ -78,9 +84,9 @@ $('#btm').click(function(){
             if (msg!="") alert(msg); else displymsg(p1,p2);      
             break; }
             case "單筆顯示": { var j=0;
-              for (var i=1;i<=dno;i++) { if ($("#m"+i).is(':checked')) {
-                $("#m"+i).attr('checked',false); $("#t7").val($("#m"+i).attr("name"));$('#dvm table tr td span.sem,#spm3,#table1,#dv4,#back').hide();
-                $('#spm1,#table2').show();displymsg($("#t7").val(),"0"); j++; break;}  }         
+              for (var i=1;i<=dno;i++) { if ($("#m"+i).is(':checked')) { $("#m"+i).prop('checked',false);
+                $("#t7").val($("#m"+i).attr("name"));$('#dvm table tr td span.sem,#spm3,#table1,#dv4,#back').hide();
+                $('#spm1,#table2').show();displymsg($("#m"+i).attr("name"),"0"); j++;  break;}  }         
             break; }
             case "確定修改": {
                  set_fb($("#dkey").val());$('#spm1,#table2').hide();displymsg(p1,p2); $('#spm3,#table1,#dv4,#back').show(); nextstep();                  
@@ -101,7 +107,7 @@ $('#bt0').click(function(){
   switch ($("#bt0").val()) {
     case  "執行"    : {
         switch (qur)	{
-          case "1": { p1 = $("#t0").val(); p2 = "0"; if (p1=="") { msg="請輸入編號";}           break; }
+          case "1": { p1 = $("#t0").val(); p2 = "0"; if (p1=="") { msg="請輸入編號";} else $("#bt0").val("回上頁");  break; }
           case "2": { p1 = $("#t1").val(); p2 = $("#t2").val(); if (p1==""||p2=="") { msg="請輸入起訖編號";} break; }
           case "3": { p1 = $("#t3").val(); p2 = "" ; if (p1=="") { msg="姓名欄位不可空白";}            break; }
           case "4": { p1 = "1" ;           p2 = "1";            break; }
@@ -110,12 +116,14 @@ $('#bt0').click(function(){
         if (msg!="") alert(msg); else displymsg(p1,p2);
     break;}
     case  "單筆顯示": { var j=0;
-        for (var i=1;i<=dno;i++) { if ($("#q"+i).is(':checked')) { $("#q"+i).attr('checked',false); 
+        for (var i=1;i<=dno;i++) { if ($("#q"+i).is(':checked')) { $("#q"+i).prop('checked',false);
           $("#t0").val($("#q"+i).attr("name"));$("#table2 tr td.lb").html("");$("#pic1").attr("src","image/photo.jpg");$('#spq2,#spq3,#table1,#back').hide();
           $("#bt0").val("回上頁");$('#spq1,#dvq,#table2').show();displymsg($("#q"+i).attr("name"),"0"); j++; break; }  }         
     break;}
     case  "回上頁": {
-          $('#spq1,#spq2,#spq3,#table2').hide(); $("#bt0").val("單筆顯示"); $('#table1,#dv4,#back').show();
+          if (qur=="1") { $("#t0").val("");$("#table2 tr td.lb").html("");$("#pic1").attr("src","image/photo.jpg");
+                            $('#spq2,#spq3,#table1,#back').hide(); $("#bt0").val("執行");$('#spq1,#dvq,#table2').show(); }
+		  else { $('#spq1,#spq2,#spq3,#table2').hide(); $("#bt0").val("單筆顯示"); $('#table1,#dv4,#back').show();}
     break;}
   } 
 });
